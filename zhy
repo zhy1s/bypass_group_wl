@@ -1,0 +1,10 @@
+local mt = getrawmetatable(game)
+setreadonly(mt, false)
+local oldIndex = mt.__index
+
+mt.__index = function(t, k)
+    if tostring(k) == "IsInGroup" then
+        return function() return true end
+    end
+    return oldIndex(t, k)
+end
